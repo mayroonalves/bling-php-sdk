@@ -1,0 +1,19 @@
+{
+    "name": "mayroonalves/bling-php-sdk",
+    "description": "Biblioteca de integração com o Bling",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "phpdocumentor/phpdocumentor": "^2.9"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mayron Alves",
+            "email": "mayroonalves@gmail.com"
+        }
+    ]
+}
