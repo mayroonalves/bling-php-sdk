@@ -2,9 +2,9 @@
 
 namespace Bling\Services;
 
-use Bling\ApiClient;
+use Bling\Core\ApiClient;
 use Bling\Connect;
-use Bling\ReadResponse;
+use Bling\Core\ReadResponse;
 
 class Base
 {
@@ -14,9 +14,9 @@ class Base
     protected $responseType = 'json';
     protected $connect;
 
-    public function __construct()
+    public function __construct($config)
     {
-        $this->connect = Connect::getInstance(new ApiClient(), new ReadResponse());
+        $this->connect = Connect::getInstance(new ApiClient($config), new ReadResponse());
     }
 
     /**

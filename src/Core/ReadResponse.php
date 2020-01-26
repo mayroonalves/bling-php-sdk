@@ -1,6 +1,6 @@
 <?php
 
-namespace Bling;
+namespace Bling\Core;
 
 use Psr\Http\Message\ResponseInterface;
 

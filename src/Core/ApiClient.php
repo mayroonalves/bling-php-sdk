@@ -1,20 +1,26 @@
 <?php
 
-namespace Bling;
+namespace Bling\Core;
 
-use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
-use Bling\Contracts\ApiClientInterface;
 use Bling\Contracts\ApiClientRequestInterface;
 
-class ApiClient implements ApiClientInterface, ApiClientRequestInterface
+class ApiClient implements ApiClientRequestInterface
 {
-    /**
-     * @return Client
-     */
-    public function initiate()
+
+    private $client;
+
+    public function __construct(array $config = [])
     {
-        return new Client();
+        $this->client = new \GuzzleHttp\Client($config);
+    }
+
+    /**
+     * @return \GuzzleHttp\Client
+     */
+    public function getClient(): \GuzzleHttp\Client
+    {
+        return $this->client;
     }
 
     /**
@@ -24,7 +30,7 @@ class ApiClient implements ApiClientInterface, ApiClientRequestInterface
      */
     public function get(string $url, array $options = []): ResponseInterface
     {
-        return $this->initiate()->get($url, $options);
+        return $this->client->get($url, $options);
     }
 
     /**
@@ -34,7 +40,7 @@ class ApiClient implements ApiClientInterface, ApiClientRequestInterface
      */
     public function delete(string $url, array $options = []): ResponseInterface
     {
-        return $this->initiate()->delete($url, $options);
+        return $this->client->delete($url, $options);
     }
 
     /**
@@ -44,7 +50,7 @@ class ApiClient implements ApiClientInterface, ApiClientRequestInterface
      */
     public function patch(string $url, array $options = []): ResponseInterface
     {
-        return $this->initiate()->patch($url, $options);
+        return $this->client->patch($url, $options);
     }
 
     /**
@@ -54,7 +60,7 @@ class ApiClient implements ApiClientInterface, ApiClientRequestInterface
      */
     public function put(string $url, array $options = []): ResponseInterface
     {
-        return $this->initiate()->put($url, $options);
+        return $this->client->put($url, $options);
     }
 
     /**
@@ -64,7 +70,7 @@ class ApiClient implements ApiClientInterface, ApiClientRequestInterface
      */
     public function post(string $url, array $options = []): ResponseInterface
     {
-        return $this->initiate()->post($url, $options);
+        return $this->client->post($url, $options);
     }
 
     /**
@@ -87,6 +93,6 @@ class ApiClient implements ApiClientInterface, ApiClientRequestInterface
 
     public function request(string $method, string $url, array $options = [])
     {
-        return $this->initiate()->request($method, $url, $options);
+        return $this->client->request($method, $url, $options);
     }
 }
