@@ -1,0 +1,7 @@
+<?php
+
+return [
+    'apikey' => '',
+    'debug' => false,
+    'http_errors' => false
+];
