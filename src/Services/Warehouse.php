@@ -35,21 +35,25 @@ class Warehouse extends Base
 
     public function all()
     {
-        return $this->connect->execute('get', $this->getMergedParameters(), "depositos{$this->getResponseType()}");
+        return $this->connect
+            ->execute('get', $this->getMergedParameters(), "depositos{$this->getResponseType()}");
     }
 
     public function get()
     {
-        return $this->connect->execute('get', $this->getMergedParameters(), "deposito{$this->getId()}{$this->getResponseType()}");
+        return $this->connect
+            ->execute('get', $this->getMergedParameters(), "deposito{$this->getId()}{$this->getResponseType()}");
     }
 
     public function store()
     {
-        return $this->connect->execute('post', $this->getMergedParameters(), "deposito{$this->getResponseType()}/");
+        return $this->connect
+            ->execute('post', $this->getMergedParameters(), "deposito{$this->getResponseType()}/");
     }
 
     public function update()
     {
-        return $this->connect->execute('put', $this->getMergedParameters(), "deposito{$this->getId()}{$this->getResponseType()}/");
+        return $this->connect
+            ->execute('put', $this->getMergedParameters(), "deposito{$this->getId()}{$this->getResponseType()}/");
     }
 }

@@ -35,21 +35,25 @@ class Order extends Base
 
     public function all()
     {
-        return $this->connect->execute('get', $this->getMergedParameters(), "pedidos{$this->getResponseType()}");
+        return $this->connect
+            ->execute('get', $this->getMergedParameters(), "pedidos{$this->getResponseType()}");
     }
 
     public function get()
     {
-        return $this->connect->execute('get', $this->getMergedParameters(), "pedido{$this->getNumero()}{$this->getResponseType()}");
+        return $this->connect
+            ->execute('get', $this->getMergedParameters(), "pedido{$this->getNumero()}{$this->getResponseType()}");
     }
 
     public function store()
     {
-        return $this->connect->execute('post', $this->getMergedParameters(), "pedido{$this->getResponseType()}/");
+        return $this->connect
+            ->execute('post', $this->getMergedParameters(), "pedido{$this->getResponseType()}/");
     }
 
     public function update()
     {
-        return $this->connect->execute('put', $this->getMergedParameters(), "pedido{$this->getNumero()}{$this->getResponseType()}/");
+        return $this->connect
+            ->execute('put', $this->getMergedParameters(), "pedido{$this->getNumero()}{$this->getResponseType()}/");
     }
 }

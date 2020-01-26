@@ -35,21 +35,25 @@ class Category extends Base
 
     public function all()
     {
-        return $this->connect->execute('get', $this->getMergedParameters(), "categorias{$this->getResponseType()}");
+        return $this->connect
+            ->execute('get', $this->getMergedParameters(), "categorias{$this->getResponseType()}");
     }
 
     public function get()
     {
-        return $this->connect->execute('get', $this->getMergedParameters(), "categoria{$this->getId()}{$this->getResponseType()}");
+        return $this->connect
+            ->execute('get', $this->getMergedParameters(), "categoria{$this->getId()}{$this->getResponseType()}");
     }
 
     public function store()
     {
-        return $this->connect->execute('post', $this->getMergedParameters(), "categoria{$this->getResponseType()}/");
+        return $this->connect
+            ->execute('post', $this->getMergedParameters(), "categoria{$this->getResponseType()}/");
     }
 
     public function update()
     {
-        return $this->connect->execute('put', $this->getMergedParameters(), "categoria{$this->getId()}{$this->getResponseType()}/");
+        return $this->connect
+            ->execute('put', $this->getMergedParameters(), "categoria{$this->getId()}{$this->getResponseType()}/");
     }
 }

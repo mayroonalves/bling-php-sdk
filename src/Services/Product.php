@@ -52,26 +52,35 @@ class Product extends Base
 
     public function all()
     {
-        return $this->connect->execute('get', $this->getMergedParameters(), "produtos{$this->getResponseType()}");
+        return $this->connect
+            ->execute('get', $this->getMergedParameters(), "produtos{$this->getResponseType()}");
     }
 
     public function get()
     {
-        return $this->connect->execute('get', $this->getMergedParameters(), "produto{$this->getCode()}{$this->getProvider()}{$this->getResponseType()}");
+        return $this->connect
+            ->execute(
+                'get',
+                $this->getMergedParameters(),
+                "produto{$this->getCode()}{$this->getProvider()}{$this->getResponseType()}"
+            );
     }
 
     public function store()
     {
-        return $this->connect->execute('post', $this->getMergedParameters(), "produto{$this->getResponseType()}/");
+        return $this->connect
+            ->execute('post', $this->getMergedParameters(), "produto{$this->getResponseType()}/");
     }
 
     public function update()
     {
-        return $this->connect->execute('post', $this->getMergedParameters(), "produto{$this->getCode()}{$this->getResponseType()}/");
+        return $this->connect
+            ->execute('post', $this->getMergedParameters(), "produto{$this->getCode()}{$this->getResponseType()}/");
     }
 
     public function destroy()
     {
-        return $this->connect->execute('delete', $this->getMergedParameters(), "produtos{$this->getCode()}");
+        return $this->connect
+            ->execute('delete', $this->getMergedParameters(), "produtos{$this->getCode()}");
     }
 }

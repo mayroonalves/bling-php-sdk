@@ -55,8 +55,12 @@ class Connect
      * @return string
      * @throws \Exception
      */
-    public function execute(string $method = "get", array $parameters = [], string $url = "", $customContentType = false): string
-    {
+    public function execute(
+        string $method = "get",
+        array $parameters = [],
+        string $url = "",
+        $customContentType = false
+    ) : string {
         if ($customContentType) {
             $response = self::$apiClient->request($method, $url, $parameters);
         } else {
@@ -76,10 +80,12 @@ class Connect
     {
         switch ($method) {
             case "get":
-                return self::$apiClient->formatGetParameters($parameters + self::$apiClient->getClient()->getConfig('query'));
+                return self::$apiClient
+                    ->formatGetParameters($parameters + self::$apiClient->getClient()->getConfig('query'));
                 break;
             default:
-                return self::$apiClient->formatRequestParameters($parameters + self::$apiClient->getClient()->getConfig('query'));
+                return self::$apiClient
+                    ->formatRequestParameters($parameters + self::$apiClient->getClient()->getConfig('query'));
                 break;
         }
     }
