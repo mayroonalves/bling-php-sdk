@@ -1,9 +1,8 @@
 <?php
 
-namespace Bling;
+namespace Bling\Core;
 
 use Bling\Contracts\RequestInterface;
-use Bling\Core\Response;
 
 class Connect
 {

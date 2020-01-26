@@ -2,10 +2,14 @@
 
 require_once "../vendor/autoload.php";
 
+use Bling\Core\Client;
 use Bling\Core\Config;
 use Bling\Services\Category;
 
-$category = new Category(Config::configure('api-token'));
+$config = require_once 'config.php';
+
+$client = Client::getInstance(Config::configure($config));
+$category = new Category();
 
 $category->setBody([
     'descricao' => 'test',

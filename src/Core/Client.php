@@ -7,11 +7,32 @@ use Bling\Contracts\RequestInterface;
 
 class Client implements RequestInterface
 {
-    private $client;
+    private static $client;
 
-    public function __construct(array $config = [])
+    /**
+     * @var instance
+     */
+    private static $instance;
+
+    private function __construct()
     {
-        $this->client = new \GuzzleHttp\Client($config);
+    }
+
+    private function __wakeup()
+    {
+    }
+
+    private function __clone()
+    {
+    }
+
+    public static function getInstance(array $config = [])
+    {
+        if (self::$instance === null) {
+            self::$client = new \GuzzleHttp\Client($config);
+            self::$instance = new self;
+        }
+        return self::$instance;
     }
 
     /**
@@ -19,7 +40,7 @@ class Client implements RequestInterface
      */
     public function getClient(): \GuzzleHttp\Client
     {
-        return $this->client;
+        return self::$client;
     }
 
     /**
@@ -29,7 +50,7 @@ class Client implements RequestInterface
      */
     public function get(string $url, array $options = []): ResponseInterface
     {
-        return $this->client->get($url, $options);
+        return self::$client->get($url, $options);
     }
 
     /**
@@ -39,7 +60,7 @@ class Client implements RequestInterface
      */
     public function delete(string $url, array $options = []): ResponseInterface
     {
-        return $this->client->delete($url, $options);
+        return self::$client->delete($url, $options);
     }
 
     /**
@@ -49,7 +70,7 @@ class Client implements RequestInterface
      */
     public function patch(string $url, array $options = []): ResponseInterface
     {
-        return $this->client->patch($url, $options);
+        return self::$client->patch($url, $options);
     }
 
     /**
@@ -59,7 +80,7 @@ class Client implements RequestInterface
      */
     public function put(string $url, array $options = []): ResponseInterface
     {
-        return $this->client->put($url, $options);
+        return self::$client->put($url, $options);
     }
 
     /**
@@ -69,7 +90,7 @@ class Client implements RequestInterface
      */
     public function post(string $url, array $options = []): ResponseInterface
     {
-        return $this->client->post($url, $options);
+        return self::$client->post($url, $options);
     }
 
     /**
@@ -92,6 +113,6 @@ class Client implements RequestInterface
 
     public function request(string $method, string $url, array $options = [])
     {
-        return $this->client->request($method, $url, $options);
+        return self::$client->request($method, $url, $options);
     }
 }

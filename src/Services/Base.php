@@ -3,7 +3,7 @@
 namespace Bling\Services;
 
 use Bling\Core\Client;
-use Bling\Connect;
+use Bling\Core\Connect;
 use Bling\Core\Response;
 
 class Base
@@ -14,9 +14,9 @@ class Base
     protected $responseType = 'json';
     protected $connect;
 
-    public function __construct($config)
+    public function __construct()
     {
-        $this->connect = Connect::getInstance(new Client($config), new Response());
+        $this->connect = Connect::getInstance(Client::getInstance(), new Response());
     }
 
     /**

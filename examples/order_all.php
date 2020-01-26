@@ -2,9 +2,13 @@
 
 require_once "../vendor/autoload.php";
 
+use Bling\Core\Client;
 use Bling\Core\Config;
 use Bling\Services\Order;
 
-$order = new Order(Config::configure('api-token'));
+$config = require_once 'config.php';
+
+$client = Client::getInstance(Config::configure($config));
+$order = new Order();
 
 echo $order->all();
