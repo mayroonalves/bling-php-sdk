@@ -39,8 +39,9 @@ class Connect
         self::$apiClient    = $apiClient;
         self::$readResponse = $readResponse;
 
-        if (self::$instance === null)
+        if (self::$instance === null) {
             self::$instance = new self;
+        }
         return self::$instance;
     }
 

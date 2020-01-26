@@ -11,7 +11,13 @@
         "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^6.5",
+        "friendsofphp/php-cs-fixer": "*"
+    },
+    "scripts": {
+      "cs-fix": [
+          "php-cs-fixer fix src --rules=@PSR2"
+      ]
     },
     "autoload": {
         "psr-4": {

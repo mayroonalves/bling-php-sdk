@@ -7,7 +7,6 @@ use Bling\Contracts\ApiClientRequestInterface;
 
 class ApiClient implements ApiClientRequestInterface
 {
-
     private $client;
 
     public function __construct(array $config = [])
