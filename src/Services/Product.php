@@ -9,6 +9,7 @@ class Product extends Base
 {
     private $code = '';
     private $provider = '';
+    private $page = 1;
 
     /**
      * @return string
@@ -43,6 +44,22 @@ class Product extends Base
     }
 
     /**
+     * @return int
+     */
+    public function getPage(): string
+    {
+        return ($this->page ? '/' : '') . ltrim($this->page, '/');
+    }
+
+    /**
+     * @param int $page
+     */
+    public function setPage(int $page): void
+    {
+        $this->page = $page;
+    }
+
+    /**
      * @param array $body
      */
     public function setBody(array $body): void
@@ -53,7 +70,11 @@ class Product extends Base
     public function all()
     {
         return $this->connect
-            ->execute('get', $this->getMergedParameters(), "produtos{$this->getResponseType()}");
+            ->execute(
+                'get',
+                $this->getMergedParameters(),
+                "produtos{$this->getPage()}{$this->getResponseType()}"
+            );
     }
 
     public function get()
