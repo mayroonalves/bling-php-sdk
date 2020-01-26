@@ -1,5 +1,5 @@
 {
-    "name": "mayroonalves/bling-php-sdk",
+    "name": "mayronalves/bling-php-sdk",
     "description": "Biblioteca de integração com o Bling",
     "type": "library",
     "require": {
