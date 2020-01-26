@@ -2,18 +2,18 @@
 
 namespace Bling;
 
-use Bling\Contracts\ApiClientRequestInterface;
-use Bling\Core\ReadResponse;
+use Bling\Contracts\RequestInterface;
+use Bling\Core\Response;
 
 class Connect
 {
     /**
-     * @var ApiClientRequestInterface
+     * @var RequestInterface
      */
     private static $apiClient;
 
     /**
-     * @var ReadResponse
+     * @var Response
      */
     private static $readResponse;
 
@@ -34,7 +34,7 @@ class Connect
     {
     }
 
-    public static function getInstance(ApiClientRequestInterface $apiClient, ReadResponse $readResponse)
+    public static function getInstance(RequestInterface $apiClient, Response $readResponse)
     {
         self::$apiClient    = $apiClient;
         self::$readResponse = $readResponse;

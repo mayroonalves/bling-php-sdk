@@ -2,9 +2,9 @@
 
 namespace Bling\Services;
 
-use Bling\Core\ApiClient;
+use Bling\Core\Client;
 use Bling\Connect;
-use Bling\Core\ReadResponse;
+use Bling\Core\Response;
 
 class Base
 {
@@ -16,7 +16,7 @@ class Base
 
     public function __construct($config)
     {
-        $this->connect = Connect::getInstance(new ApiClient($config), new ReadResponse());
+        $this->connect = Connect::getInstance(new Client($config), new Response());
     }
 
     /**

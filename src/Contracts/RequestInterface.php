@@ -4,7 +4,7 @@ namespace Bling\Contracts;
 
 use Psr\Http\Message\ResponseInterface;
 
-interface ApiClientRequestInterface
+interface RequestInterface
 {
     public function request(string $method, string $url, array $options = []);
 

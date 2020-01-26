@@ -3,9 +3,9 @@
 namespace Bling\Core;
 
 use Psr\Http\Message\ResponseInterface;
-use Bling\Contracts\ApiClientRequestInterface;
+use Bling\Contracts\RequestInterface;
 
-class ApiClient implements ApiClientRequestInterface
+class Client implements RequestInterface
 {
     private $client;
 

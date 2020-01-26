@@ -4,7 +4,7 @@ namespace Bling\Core;
 
 use Psr\Http\Message\ResponseInterface;
 
-class ReadResponse
+class Response
 {
     /**
      * Read the PSR response after the api request is made
