@@ -16,7 +16,7 @@ class Base
 
     public function __construct()
     {
-        $this->connect = new Connect(new ApiClient(), new ReadResponse());
+        $this->connect = Connect::getInstance(new ApiClient(), new ReadResponse());
     }
 
     /**

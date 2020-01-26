@@ -46,4 +46,4 @@ $product->setBody([
     // 'urlVideo' => '',
     // 'localizacao' => '',
 ]);
-echo $product->create();
+echo $product->store();

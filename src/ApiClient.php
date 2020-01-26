@@ -7,7 +7,6 @@ use Psr\Http\Message\ResponseInterface;
 use Bling\Contracts\ApiClientInterface;
 use Bling\Contracts\ApiClientRequestInterface;
 
-
 class ApiClient implements ApiClientInterface, ApiClientRequestInterface
 {
     /**

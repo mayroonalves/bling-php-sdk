@@ -47,7 +47,7 @@ class Product extends Base
      */
     public function setBody(array $body): void
     {
-        $this->body = ['xml' => (new Body(new XMLBody('<produto/>')))->setBody($body)];
+        $this->body = ['xml' => (new Body(new XMLBody('produto')))->setBody($body)];
     }
 
     public function all()
@@ -60,13 +60,18 @@ class Product extends Base
         return $this->connect->execute('get', $this->getMergedParameters(), "produto{$this->getCode()}{$this->getProvider()}{$this->getResponseType()}");
     }
 
-    public function create()
+    public function store()
+    {
+        return $this->connect->execute('post', $this->getMergedParameters(), "produto{$this->getResponseType()}/");
+    }
+
+    public function update()
     {
         return $this->connect->execute('post', $this->getMergedParameters(), "produto{$this->getCode()}{$this->getResponseType()}/");
     }
 
-    public function delete()
+    public function destroy()
     {
-        return $this->connect->execute('delete', $this->getMergedParameters(), "produtos{$this->getCode()}{$this->getResponseType()}");
+        return $this->connect->execute('delete', $this->getMergedParameters(), "produtos{$this->getCode()}");
     }
 }

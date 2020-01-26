@@ -8,37 +8,49 @@ class Connect
 {
     const BASE_URL = "https://bling.com.br/Api/v2/";
     const API_KEY = 'e38f87f6fa4c8bab16f74ab5374730f44ce534e7102fb7b495347874cad9a9e874c83a4e';
-    const DEBUG = true;
+    const DEBUG = false;
+    const HTTP_ERRORS = false;
 
     /**
      * @var ApiClientRequestInterface
      */
-    private $apiClient;
+    private static $apiClient;
+
     /**
      * @var ReadResponse
      */
-    private $readResponse;
-    /**
-     * @var Repository
-     */
-    // private $config;
+    private static $readResponse;
 
     /**
-     * Connect constructor.
-     * @param ApiClientRequestInterface $apiClient
-     * @param ReadResponse $readResponse
-     * // * @param Repository $config
+     * @var instance
      */
-    public function __construct(ApiClientRequestInterface $apiClient, ReadResponse $readResponse)
+    private static $instance;
+
+    private function __construct()
     {
-        $this->apiClient = $apiClient;
-        $this->readResponse = $readResponse;
     }
 
+    private function __wakeup()
+    {
+    }
 
+    private function __clone()
+    {
+    }
+
+    public static function getInstance(ApiClientRequestInterface $apiClient, ReadResponse $readResponse)
+    {
+        self::$apiClient    = $apiClient;
+        self::$readResponse = $readResponse;
+
+        if (self::$instance === null)
+            self::$instance = new self;
+        return self::$instance;
+    }
 
     /**
      * Send a request to the api and return the response
+     *
      * @param string $method
      * @param array $parameters
      * @param string $url
@@ -49,30 +61,31 @@ class Connect
     public function execute(string $method = "get", array $parameters = [], string $url = "", $customContentType = false): string
     {
         $fullUrl = $this->formatUrl($url);
-        $queryParameters = $this->getQueryParameters($method, $parameters);
-        echo '<pre>';
-        var_dump($fullUrl, $method, $this->mergeHeaders($queryParameters));
-        echo '</pre>';
+        // $queryParameters = $this->getQueryParameters($method, $parameters);
+        // echo '<pre>';
+        // var_dump($fullUrl, $method, $this->mergeHeaders($queryParameters));
+        // echo '</pre>';
         // exit;
 
         if ($customContentType) {
-            $response = $this->apiClient->request($method, $fullUrl, $this->mergeHeaders($parameters));
+            $response = self::$apiClient->request($method, $fullUrl, $this->mergeHeaders($parameters));
         } else {
             $queryParameters = $this->getQueryParameters($method, $parameters);
-            $response = $this->apiClient->$method($fullUrl, $this->mergeHeaders($queryParameters));
+            $response        = self::$apiClient->$method($fullUrl, $this->mergeHeaders($queryParameters));
         }
 
-        return $this->readResponse->getResponseContents($response);
+        return self::$readResponse->getResponseContents($response);
     }
 
     /**
      * Merge any headers from the api-wrapper config file with any custom headers for this request
+     *
      * @param array $parameters
      * @return array
      */
     private function mergeHeaders(array $parameters): array
     {
-        return array_merge($parameters, ['debug' => self::DEBUG]);
+        return array_merge($parameters, ['debug' => self::DEBUG, 'http_errors' => self::HTTP_ERRORS]);
     }
 
 
@@ -85,10 +98,10 @@ class Connect
     {
         switch ($method) {
             case "get":
-                return $this->apiClient->formatGetParameters($parameters + ['apikey' => self::API_KEY]);
+                return self::$apiClient->formatGetParameters($parameters + ['apikey' => self::API_KEY]);
                 break;
             default:
-                return $this->apiClient->formatRequestParameters($parameters + ['apikey' => self::API_KEY]);
+                return self::$apiClient->formatRequestParameters($parameters + ['apikey' => self::API_KEY]);
                 break;
         }
     }
