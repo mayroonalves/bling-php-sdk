@@ -48,7 +48,7 @@ class Product extends Base
      */
     public function getPage(): string
     {
-        return ($this->page ? '/' : '') . ltrim($this->page, '/');
+        return ($this->page ? '/' : '') . ltrim('page=' . $this->page, '/');
     }
 
     /**
